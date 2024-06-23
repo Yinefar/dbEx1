@@ -55,6 +55,8 @@ PREC_LIBRO DECIMAL NOT NULL,
 STOCK_LIBRO INT)
 GO
 
+---Revisar la boleta para trabajar con sp y cómo seria XD
+ 
 USE BIBLIOTERCA_DB
 GO 
 CREATE TABLE TB_BOLETA
