@@ -28,7 +28,7 @@ CONT_VEND VARCHAR(30) NOT NULL
 GO
 
 ---clientes 
-
+---añadir 2 más
 USE BIBLIOTERCA_DB
 GO 
 
