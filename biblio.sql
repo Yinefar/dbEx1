@@ -106,14 +106,14 @@ values
 
 INSERT INTO TB_VENDEDOR 
 values
-(30984570, 'Paulo' , 'Barrera Quispe', 945673213,'pbarrera@btc.com', 'ADMIN')
+(30984570, 'Paulo' , 'Barrera Quispe', 945673213,'pbarrera@btc.com', 'Vendedor') -- corregir contra del vendedor xd has puesto admin
 
 
 INSERT INTO TB_LIBRO 
 values 
-('L001', 'La ciudad y los perros', 'Mario Vargas Llosa', 170.00, 10)
-
-
+('L001', 'La ciudad y los perros', 'Mario Vargas Llosa', 20.00, 10) --- corregir precios xd muy altos
+('L002', 'Edipo rey', 'Sófocles', 10.00, 10)
+('L003', 'Álgebra básica', 'Michel Queysanne', 18.00, 10)
 ---------------
 
 --procedimiento almacenado 
