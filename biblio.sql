@@ -147,6 +147,10 @@ END;
 GO
 
 
+---- Considerar realizar unas tablas  para autores o editoriales  o solo tomarlos como atributos de los libros 
+----- trabajar uso de desplegable (combo box)
+
+
 
 
 
