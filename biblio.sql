@@ -50,7 +50,8 @@ GO
 CREATE TABLE TB_LIBRO    ----CONSIDERAR EDITORIAL  XD
 (ID_LIBRO VARCHAR (10) NOT NULL PRIMARY KEY, 
 TIT_LIBRO VARCHAR (60) NOT NULL, 
-AUT_LIBRO VARCHAR (50),
+EDIT VARCHAR(60) NOT NULL,
+AUT_LIBRO VARCHAR (50) NOT NULL,
 PREC_LIBRO DECIMAL NOT NULL, 
 STOCK_LIBRO INT)
 GO
@@ -106,17 +107,42 @@ values
 
 INSERT INTO TB_VENDEDOR 
 values
-(30984570, 'Paulo' , 'Barrera Quispe', 945673213,'pbarrera@btc.com', 'Vendedor') -- corregir contra del vendedor xd has puesto admin
+(30984570, 'Paulo' , 'Barrera Quispe', 945673213,'pbarrera@btc.com', 'Vendedor') 
+
+INSERT INTO TB_VENDEDOR 
+values
+(45673289, 'Hermelinda' , 'Guevara Soto', 945673213,'hguevara@btc.com', 'Vendedora') -- corregir contra del vendedor xd has puesto admin
 
 
 INSERT INTO TB_LIBRO 
 values 
-('L001', 'La ciudad y los perros', 'Mario Vargas Llosa', 20.00, 10) --- corregir precios xd muy altos
-('L002', 'Edipo rey', 'Sófocles', 10.00, 10)
-('L003', 'Álgebra básica', 'Michel Queysanne', 18.00, 10)
----------------
+('L001', 'La ciudad y los perros', 'Alfaguara',  'Mario Vargas Llosa', 20.00, 10) --- corregir precios xd muy altos
 
+INSERT INTO TB_LIBRO 
+values 
+('L002', 'Edipo rey',  'Amazonas', 'Sófocles', 10.00, 10)
+
+INSERT INTO TB_LIBRO 
+values 
+('L003', 'Álgebra básica', 'vicens-vivens', 'Michel Queysanne', 18.00, 10)
+
+
+-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 --procedimiento almacenado 
+
+----Procedimiento almacenado Vendedores
+
+USE BIBLIOTERCA_DB  
+GO
+
+CREATE PROCEDURE Usp_listaVendedores
+As
+select * from TB_VENDEDOR 
+
+
+
+
 -- Llamar al procedimiento almacenado para insertar una boleta
 EXEC SP_InsertBoleta @ID_VEND = 1, @ID_CLIENT = 1, @ID_LIBRO = 'L001', @CANT_LIBRO = 2, @ID_BOLETA = 'B00001';
 USE BIBLIOTERCA_DB;
@@ -150,6 +176,79 @@ GO
 ---- Considerar realizar unas tablas  para autores o editoriales  o solo tomarlos como atributos de los libros 
 ----- trabajar uso de desplegable (combo box)
 
+
+----CRUD VENDEDORES-----------------------------
+
+USE BIBLIOTERCA_DB 
+GO 
+---------- no es necesario 
+CREATE PROCEDURE usp_listaVendedores 
+As
+Select * from TB_VENDEDORES
+Go
+-------------------------
+
+Create procedure usp_addVendedores 
+@ID_VEND   INT, 
+@NOM_VEND VARCHAR (20),
+@AP_VEND VARCHAR (30),
+@CEL_VEND  INT, 
+@CORREO_VEND  VARCHAR (60),
+@CONT_VEND  VARCHAR (65)
+As
+insert into TB_VENDEDOR
+Values (@ID_VEND, @NOM_VEND, @AP_VEND, @CEL_VEND, @CORREO_VEND, @CONT_VEND);
+GO
+
+
+
+Create procedure usp_updateVendedores 
+@ID_VEND   INT, 
+@NOM_VEND VARCHAR (20),
+@AP_VEND VARCHAR (30),
+@CEL_VEND  INT, 
+@CORREO_VEND  VARCHAR (60),
+@CONT_VEND  VARCHAR (65)
+As
+Update TB_VENDEDOR
+Set  ID_VEND = @ID_VEND, NOM_VEND = @NOM_VEND, AP_VEND = @AP_VEND, CEL_VEND =@CEL_VEND, CORREO_VEND= @CORREO_VEND, CONT_VEND = @CONT_VEND
+where ID_VEND = @ID_VEND;
+
+GO
+
+
+SELECT * FROM TB_VENDEDOR
+
+Create procedure usp_deleteVendedores 
+@ID_VEND   INT
+As
+delete TB_VENDEDORES 
+where ID_VEND=@ID_VEND;
+GO
+
+
+
+
+
+
+---DROPEAR PROCEDIMIENTOS ALMACENADOS
+DROP PROCEDURE [usp_addVendedores];
+GO
+
+
+
+
+
+
+CREATE TABLE TB_VENDEDOR 
+(ID_VEND INT NOT NULL PRIMARY KEY,
+NOM_VEND VARCHAR (20) NOT NULL, 
+AP_VEND VARCHAR (30) NOT NULL, 
+CEL_VEND INT, 
+CORREO_VEND VARCHAR (60), 
+CONT_VEND VARCHAR(65) NOT NULL
+)
+GO
 
 
 
