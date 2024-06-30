@@ -186,7 +186,7 @@ CREATE PROCEDURE usp_listaVendedores
 As
 Select * from TB_VENDEDORES
 Go
--------------------------
+-------------------------CRUD DE VENDEDORES
 
 Create procedure usp_addVendedores 
 @ID_VEND   INT, 
@@ -227,7 +227,7 @@ where ID_VEND=@ID_VEND;
 GO
 
 
-
+--------------------------------
 
 
 
@@ -236,7 +236,7 @@ DROP PROCEDURE [usp_addVendedores];
 GO
 
 
-
+----------------------------------------------
 
 
 
