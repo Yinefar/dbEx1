@@ -250,6 +250,75 @@ CONT_VEND VARCHAR(65) NOT NULL
 )
 GO
 
+-----------------
+
+USE BIBLIOTERCA_DB
+GO
+DROP TABLE USUARIO
+GO 
+
+CREATE TABLE USUARIO (
+IdUsuario int primary key identity (1, 1),
+Correo varchar (100),
+Clave varchar (500)
+)
+-----------------------------------
+
+DROP PROCEDURE [sp_RegistrarUsuario];
+GO
+----------------------------------------
+create proc sp_RegistrarUsuario(
+@Correo varchar (100), 
+@Clave varchar (500),
+@Registrado bit output,
+@Mensaje varchar (100) output
+)
+as
+begin
+
+if(not exists (select * from USUARIO where Correo = @Correo))
+begin
+		insert into USUARIO(Correo, Clave) values (@Correo, @Clave)
+		set @Registrado = 1
+		set @Mensaje = 'usuario registrado'
+	end 
+	else
+	begin
+		 set @Registrado = 0
+		 set @Mensaje = 'correo ya existe'
+
+	 end
+end 
+
+-----------------------
+
+create proc sp_ValidarUsuario (
+@Correo varchar(100),
+@Clave varchar (500)
+)
+as
+begin
+	if(exists (select * from  USUARIO where Correo = @Correo and Clave = @Clave))
+		select IdUsuario from USUARIO where Correo = @Correo and Clave = @Clave 
+else 
+	select '0'
+
+end 
+
+------------------------------------------------------------
+
+	declare @registrado bit, @mensaje varchar(100)
+	exec sp_RegistrarUsuario 'melyn@yimeil.com', 'ee682dcf56193bb7bbf3f2eb1c26aa3c632293e72254c294ed53a831c583ea9c', @registrado output, @mensaje output 
+	select @registrado
+	select @mensaje
+
+	exec sp_ValidarUsuario  'melyn@yimeil.com', 'ee682dcf56193bb7bbf3f2eb1c26aa3c632293e72254c294ed53a831c583ea9c'
+
+
+	select * from USUARIO
+
+
+
 
 
 
